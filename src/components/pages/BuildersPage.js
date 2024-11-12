@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // Vérifiez que le chemin d'import est correct
 import DistributorSection from '../builders/DistributorSection';
+import IssuerSection from '../builders/IssuerSection';
 
 const BuildersSidebar = ({ activeSection, setActiveSection }) => {
   const menuItems = [
@@ -36,10 +37,14 @@ const BuildersSidebar = ({ activeSection, setActiveSection }) => {
 
 const BuildersContent = ({ section }) => {
   const renderContent = () => {
-    if (section === 'distributor') {
-      return <DistributorSection />;
+    switch (section) {
+      case 'distributor':
+        return <DistributorSection />;
+      case 'issuer':
+        return <IssuerSection />;
+      default:
+        return <div className="text-purple-200 text-center">In Progress...</div>;
     }
-    return <div className="text-purple-200 text-center">In Progress...</div>;
   };
 
   return (

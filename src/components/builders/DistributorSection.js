@@ -100,7 +100,7 @@ const DistributorSection = () => {
                           after:bg-purple-300 after:rounded-full after:h-5 after:w-5 
                           after:transition-all peer-checked:bg-purple-500/30"
             ></div>
-            <span className="ml-3 text-purple-200 font-medium">Enable SPV Selection</span>
+            <span className="ml-3 text-purple-200 font-medium">Enable Distributor Selection</span>
           </label>
 
           {enableSPV && (
@@ -113,7 +113,7 @@ const DistributorSection = () => {
                          text-purple-100 focus:outline-none focus:ring-2 focus:ring-purple-400/30
                          ${isConfigLocked ? 'cursor-not-allowed opacity-80' : ''}`}
               >
-                <option value="">Select SPV</option>
+                <option value="">Select Distributor</option>
                 {spvOptions.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}
