@@ -10,6 +10,7 @@ const TokenSection = () => {
       name: 'APPLE-SHARE-USD',
       ticker: 'AAPL',
       mintUnmintFees: '2.5',
+      rewardFees: '1.5',
       walletFees: '0x1234567890123456789012345678901234567890',
     },
     {
@@ -17,6 +18,7 @@ const TokenSection = () => {
       name: 'BITCOIN-USD',
       ticker: 'BTC',
       mintUnmintFees: '3.0',
+      rewardFees: '2.0',
       walletFees: '0x2345678901234567890123456789012345678901',
     },
     {
@@ -24,6 +26,7 @@ const TokenSection = () => {
       name: 'GOOGLE-SHARE-USD',
       ticker: 'GOOGL',
       mintUnmintFees: '2.0',
+      rewardFees: '1.0',
       walletFees: '0x3456789012345678901234567890123456789012',
     },
   ]);
@@ -32,6 +35,7 @@ const TokenSection = () => {
     name: '',
     ticker: '',
     mintUnmintFees: '',
+    rewardFees: '',
     walletFees: '',
   });
 
@@ -53,6 +57,7 @@ const TokenSection = () => {
       name: '',
       ticker: '',
       mintUnmintFees: '',
+      rewardFees: '',
       walletFees: '',
     });
     setShowConfig(true);
@@ -77,6 +82,7 @@ const TokenSection = () => {
       tokenConfig.name.trim() !== '' &&
       tokenConfig.ticker.trim() !== '' &&
       tokenConfig.mintUnmintFees !== '' &&
+      tokenConfig.rewardFees !== '' &&
       validateWalletAddress(tokenConfig.walletFees)
     );
   };
@@ -175,8 +181,8 @@ const TokenSection = () => {
             <div className="space-y-6">
               {/* First Row - Name, Ticker, Fees */}
               <div className="flex gap-6">
-                {/* Name Field - 50% width */}
-                <div className="flex-grow">
+                {/* Name Field - 40% width */}
+                <div className="w-2/5">
                   <label className="block text-sm font-medium text-purple-200 mb-2">Name</label>
                   <input
                     type="text"
@@ -191,8 +197,8 @@ const TokenSection = () => {
                   />
                 </div>
 
-                {/* Ticker Field - 25% width */}
-                <div className="w-1/4">
+                {/* Ticker Field - 20% width */}
+                <div className="w-1/5">
                   <label className="block text-sm font-medium text-purple-200 mb-2">Ticker</label>
                   <input
                     type="text"
@@ -207,15 +213,36 @@ const TokenSection = () => {
                   />
                 </div>
 
-                {/* Mint/Unmint Fees Field - 25% width */}
-                <div className="w-1/4">
+                {/* 1st Market Fees Field - 20% width */}
+                <div className="w-1/5">
                   <label className="block text-sm font-medium text-purple-200 mb-2">
-                    Mint/Unmint Fees (%)
+                    1st Market Fees (%)
                   </label>
                   <input
                     type="number"
                     value={tokenConfig.mintUnmintFees}
                     onChange={(e) => handleInputChange('mintUnmintFees', e.target.value)}
+                    disabled={isConfigLocked}
+                    placeholder="between 0 and 5%"
+                    min="0"
+                    max="5"
+                    step="0.01"
+                    className={`w-full px-4 py-2 bg-white/5 border border-purple-300/20 rounded-lg
+                             text-purple-100 focus:outline-none focus:ring-2 focus:ring-purple-400/30
+                             ${isConfigLocked ? 'cursor-not-allowed opacity-80' : ''}
+                             placeholder:text-purple-200/30`}
+                  />
+                </div>
+
+                {/* Reward Fees Field - 20% width */}
+                <div className="w-1/5">
+                  <label className="block text-sm font-medium text-purple-200 mb-2">
+                    Reward Fees (%)
+                  </label>
+                  <input
+                    type="number"
+                    value={tokenConfig.rewardFees}
+                    onChange={(e) => handleInputChange('rewardFees', e.target.value)}
                     disabled={isConfigLocked}
                     placeholder="between 0 and 5%"
                     min="0"
