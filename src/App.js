@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import MenuGrid from './components/layout/MenuGrid';
-import BuildersPage from './components/pages/BuildersPageold';
+import BuildersPage from './components/pages/BuildersPage';
 import DistributorsPage from './components/pages/DistributorsPage';
 import IssuersPage from './components/pages/IssuersPage';
 import DocumentationPage from './components/pages/DocumentationPage';
