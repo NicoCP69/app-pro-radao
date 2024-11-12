@@ -65,7 +65,7 @@ const ContentSection = () => {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-semibold bg-gradient-to-r from-purple-200 to-pink-200 bg-clip-text text-transparent">
-          Content Configuration
+          Reserve Configuration
         </h2>
         <div className="flex space-x-4">
           {isConfigLocked && (
@@ -96,7 +96,7 @@ const ContentSection = () => {
       <div className="bg-white/5 backdrop-blur-xl rounded-lg p-6 border border-purple-300/20 space-y-6">
         {/* Question Title */}
         <div className="text-center mb-8">
-          <h3 className="text-xl text-purple-200">What do you want in your Token's content?</h3>
+          <h3 className="text-xl text-purple-200">What do you want in your Token's reserve?</h3>
         </div>
 
         {/* Category Buttons */}

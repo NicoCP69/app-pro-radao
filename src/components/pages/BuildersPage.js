@@ -3,15 +3,15 @@ import DistributorSection from '../builders/DistributorSection';
 import IssuerSection from '../builders/IssuerSection';
 import HearingSection from '../builders/HearingSection';
 import TokenSection from '../builders/TokenSection';
-import ContentSection from '../builders/ContentSection'; // Ajout de l'import
+import ContentSection from '../builders/ContentSection';
 
 const BuildersSidebar = ({ activeSection, setActiveSection }) => {
   const menuItems = [
     { id: 'token', title: 'Token' },
-    { id: 'content', title: 'Content' },
+    { id: 'content', title: 'Reserve' },
     { id: 'issuer', title: 'Issuer' },
     { id: 'distributor', title: 'Distributor' },
-    { id: 'hearing', title: 'Hearing' },
+    { id: 'hearing', title: 'Audience' },
   ];
 
   return (
@@ -43,7 +43,7 @@ const BuildersContent = ({ section }) => {
       case 'token':
         return <TokenSection />;
       case 'content':
-        return <ContentSection />; // Ajout du case pour Content
+        return <ContentSection />;
       case 'distributor':
         return <DistributorSection />;
       case 'issuer':

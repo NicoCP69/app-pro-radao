@@ -37,7 +37,7 @@ const HearingSection = () => {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-semibold bg-gradient-to-r from-purple-200 to-pink-200 bg-clip-text text-transparent">
-          Hearing Configuration
+          Audience Configuration
         </h2>
         <button
           onClick={handleSubmit}
