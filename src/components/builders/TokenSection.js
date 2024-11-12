@@ -36,12 +36,19 @@ const TokenSection = () => {
   });
 
   const handleSelectToken = (token) => {
-    setTokenConfig(token);
-    setShowConfig(true);
-    setIsConfigLocked(true);
+    if (token) {
+      setSelectedToken(token);
+      setTokenConfig(token);
+      setShowConfig(true);
+      setIsConfigLocked(true);
+    } else {
+      setSelectedToken(null);
+      setShowConfig(false);
+    }
   };
 
   const handleAddNew = () => {
+    setSelectedToken(null);
     setTokenConfig({
       name: '',
       ticker: '',
@@ -76,7 +83,17 @@ const TokenSection = () => {
 
   const handleSaveToken = () => {
     if (isFormValid()) {
-      setTokens((prev) => [...prev, { ...tokenConfig, id: prev.length + 1 }]);
+      if (selectedToken) {
+        // Update existing token
+        setTokens((prev) =>
+          prev.map((token) =>
+            token.id === selectedToken.id ? { ...tokenConfig, id: token.id } : token
+          )
+        );
+      } else {
+        // Add new token
+        setTokens((prev) => [...prev, { ...tokenConfig, id: prev.length + 1 }]);
+      }
       setIsConfigLocked(true);
     }
   };
@@ -100,7 +117,11 @@ const TokenSection = () => {
         </div>
 
         <select
-          onChange={(e) => handleSelectToken(tokens.find((t) => t.id === parseInt(e.target.value)))}
+          onChange={(e) => {
+            const selectedId = parseInt(e.target.value);
+            const token = tokens.find((t) => t.id === selectedId);
+            handleSelectToken(token);
+          }}
           className="w-full px-4 py-2 bg-white/5 border border-purple-300/20 rounded-lg
                    text-purple-100 focus:outline-none focus:ring-2 focus:ring-purple-400/30"
           value={selectedToken?.id || ''}
@@ -134,8 +155,8 @@ const TokenSection = () => {
               )}
               <button
                 onClick={() => {
-                  setIsConfigLocked(true);
                   if (!isConfigLocked) handleSaveToken();
+                  setIsConfigLocked(true);
                 }}
                 disabled={!isFormValid() || isConfigLocked}
                 className={`px-4 py-2 rounded-lg transition-all duration-300 
