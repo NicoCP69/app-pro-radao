@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/app-pro-radao/static/css/main.6740e442.css",
-    "main.js": "/app-pro-radao/static/js/main.e45bc8e8.js",
+    "main.css": "/app-pro-radao/static/css/main.eac83289.css",
+    "main.js": "/app-pro-radao/static/js/main.38982a3e.js",
     "index.html": "/app-pro-radao/index.html",
-    "main.6740e442.css.map": "/app-pro-radao/static/css/main.6740e442.css.map",
-    "main.e45bc8e8.js.map": "/app-pro-radao/static/js/main.e45bc8e8.js.map"
+    "main.eac83289.css.map": "/app-pro-radao/static/css/main.eac83289.css.map",
+    "main.38982a3e.js.map": "/app-pro-radao/static/js/main.38982a3e.js.map"
   },
   "entrypoints": [
-    "static/css/main.6740e442.css",
-    "static/js/main.e45bc8e8.js"
+    "static/css/main.eac83289.css",
+    "static/js/main.38982a3e.js"
   ]
 }
