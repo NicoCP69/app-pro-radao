@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// Vérifiez que le chemin d'import est correct
 import DistributorSection from '../builders/DistributorSection';
 
 const BuildersSidebar = ({ activeSection, setActiveSection }) => {
@@ -35,16 +34,9 @@ const BuildersSidebar = ({ activeSection, setActiveSection }) => {
 };
 
 const BuildersContent = ({ section }) => {
-  const renderContent = () => {
-    if (section === 'distributor') {
-      return <DistributorSection />;
-    }
-    return <div className="text-purple-200 text-center">In Progress...</div>;
-  };
-
   return (
     <div className="flex-1 bg-white/5 backdrop-blur-xl rounded-lg p-6 border border-purple-300/20">
-      {renderContent()}
+      <div className="text-purple-200 text-center">In Progress...</div>
     </div>
   );
 };
