@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Fond circulaire avec dégradé -->
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#db2777;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+      <feOffset dx="0" dy="0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Cercle de fond -->
+  <circle cx="256" cy="256" r="240" fill="url(#grad)" filter="url(#shadow)"/>
+  
+  <!-- 'R' stylisé -->
+  <path d="M 186 156
+           h 120 
+           a 60 60 0 1 1 0 100
+           h -70
+           l 70 100
+           h -60
+           l -70 -100
+           h 10
+           a 50 50 0 1 0 0 -100
+           h 0
+           v 200
+           h -40
+           v -200
+           z"
+        fill="white"
+        filter="url(#shadow)"/>
+</svg>
