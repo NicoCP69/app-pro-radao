@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import TokenSection from '../builders/TokenSection';
 import DistributorSection from '../builders/DistributorSection';
 import IssuerSection from '../builders/IssuerSection';
 import HearingSection from '../builders/HearingSection';
+import TokenSection from '../builders/TokenSection';
+import ContentSection from '../builders/ContentSection'; // Ajout de l'import
 
 const BuildersSidebar = ({ activeSection, setActiveSection }) => {
   const menuItems = [
@@ -41,6 +42,8 @@ const BuildersContent = ({ section }) => {
     switch (section) {
       case 'token':
         return <TokenSection />;
+      case 'content':
+        return <ContentSection />; // Ajout du case pour Content
       case 'distributor':
         return <DistributorSection />;
       case 'issuer':
