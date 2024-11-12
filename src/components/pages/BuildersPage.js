@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import TokenSection from '../builders/TokenSection';
 import DistributorSection from '../builders/DistributorSection';
 import IssuerSection from '../builders/IssuerSection';
 import HearingSection from '../builders/HearingSection';
@@ -38,6 +39,8 @@ const BuildersSidebar = ({ activeSection, setActiveSection }) => {
 const BuildersContent = ({ section }) => {
   const renderContent = () => {
     switch (section) {
+      case 'token':
+        return <TokenSection />;
       case 'distributor':
         return <DistributorSection />;
       case 'issuer':
