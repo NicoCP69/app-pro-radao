@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/app-pro-radao/static/css/main.6740e442.css",
+    "main.js": "/app-pro-radao/static/js/main.e45bc8e8.js",
+    "index.html": "/app-pro-radao/index.html",
+    "main.6740e442.css.map": "/app-pro-radao/static/css/main.6740e442.css.map",
+    "main.e45bc8e8.js.map": "/app-pro-radao/static/js/main.e45bc8e8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6740e442.css",
+    "static/js/main.e45bc8e8.js"
+  ]
+}
