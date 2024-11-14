@@ -1,5 +1,5 @@
 import React from 'react';
-import { Zap, ChevronRight, TrendingUp, Shield, Target } from 'lucide-react';
+import { Zap, ChevronRight, Coins, Lock, PiggyBank } from 'lucide-react';
 
 const StrategyCard = ({ title, description, icon: Icon }) => (
   <div
@@ -22,21 +22,19 @@ const StrategyCard = ({ title, description, icon: Icon }) => (
 const StrategySection = () => {
   const strategies = [
     {
-      icon: TrendingUp,
-      title: 'Growth Strategy',
-      description:
-        'Define and monitor your key growth metrics and objectives for sustainable expansion.',
+      icon: Coins,
+      title: 'Stake',
+      description: 'This allows you to stake an ART to obtain yield',
     },
     {
-      icon: Target,
-      title: 'Market Positioning',
-      description:
-        'Analyze market dynamics and position your token for optimal visibility and adoption.',
+      icon: Lock,
+      title: 'Collateralize',
+      description: 'adds an ART as collateral in order to have borrowing capacity',
     },
     {
-      icon: Shield,
-      title: 'Risk Management',
-      description: 'Implement robust risk management protocols to protect assets and stakeholders.',
+      icon: PiggyBank,
+      title: 'Lend',
+      description: 'Lend your ART and get returns',
     },
   ];
 
@@ -48,9 +46,7 @@ const StrategySection = () => {
           <h2 className="text-2xl font-semibold bg-gradient-to-r from-yellow-200 to-amber-200 bg-clip-text text-transparent">
             Strategy Dashboard
           </h2>
-          <p className="text-yellow-100/70 mt-2">
-            Optimize your token strategy and market position
-          </p>
+          <p className="text-yellow-100/70 mt-2">Choose your ART strategy</p>
         </div>
         <button
           className="px-4 py-2 rounded-lg bg-gradient-to-r from-yellow-500/20 to-amber-500/20 
@@ -65,33 +61,10 @@ const StrategySection = () => {
       </div>
 
       {/* Main Content */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {strategies.map((strategy, index) => (
           <StrategyCard key={index} {...strategy} />
         ))}
-      </div>
-
-      {/* Metrics Section */}
-      <div className="mt-8 bg-white/5 backdrop-blur-xl rounded-lg p-6 border border-yellow-300/20">
-        <h3 className="text-lg font-semibold bg-gradient-to-r from-yellow-200 to-amber-200 bg-clip-text text-transparent mb-4">
-          Key Strategy Metrics
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            { label: 'Market Cap Goal', value: '$10M' },
-            { label: 'Growth Rate', value: '+15%' },
-            { label: 'Risk Score', value: 'Low' },
-          ].map((metric, index) => (
-            <div
-              key={index}
-              className="p-4 rounded-lg bg-gradient-to-r from-yellow-500/10 to-amber-500/10 
-                                      border border-yellow-300/20"
-            >
-              <p className="text-yellow-100/70 text-sm">{metric.label}</p>
-              <p className="text-yellow-100 text-xl mt-1">{metric.value}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );
