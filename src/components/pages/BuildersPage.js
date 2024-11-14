@@ -6,7 +6,7 @@ import ContentSection from '../builders/ContentSection';
 import DistributorSection from '../builders/DistributorSection';
 import ComplianceSection from '../builders/ComplianceSection';
 import StrategySection from '../builders/StrategySection';
-import { Zap } from 'lucide-react'; // Correction ici
+import { Zap, ChevronRight } from 'lucide-react';
 
 const BuildersSidebar = ({ activeSection, setActiveSection }) => {
   const menuItems = [
@@ -39,26 +39,55 @@ const BuildersSidebar = ({ activeSection, setActiveSection }) => {
           </button>
         ))}
       </div>
-      {/* Strategy button with significant spacing and lightning icon */}
-      <div className="flex-grow min-h-[100px]" /> {/* Spacer */}
+      <div className="flex-grow min-h-[100px]" />
       <button
         onClick={() => setActiveSection('strategy')}
-        className={`w-full px-6 py-3 rounded-lg transition-all duration-300
-          backdrop-blur-xl border border-yellow-300/40
+        className={`group w-full px-6 py-3 rounded-lg transition-all duration-300
+          backdrop-blur-xl border
           mb-6
           ${
             activeSection === 'strategy'
-              ? 'bg-gradient-to-r from-yellow-500/30 to-amber-500/30 text-yellow-100 scale-105 shadow-lg'
-              : 'bg-white/5 text-yellow-300 hover:bg-white/10 hover:scale-102'
+              ? 'bg-gradient-to-br from-yellow-400/40 via-amber-500/40 to-yellow-600/40 border-yellow-300/70 shadow-[0_0_15px_rgba(251,191,36,0.3)] scale-105'
+              : 'bg-gradient-to-br from-yellow-400/20 via-amber-500/20 to-yellow-600/20 border-yellow-300/50 hover:border-yellow-300/70 hover:shadow-[0_0_10px_rgba(251,191,36,0.2)]'
           }
-          flex items-center gap-3
+          flex items-center justify-between
           transform hover:translate-x-1`}
       >
-        <Zap
+        <div className="flex items-center gap-3">
+          <div
+            className={`p-1 rounded-full
+            ${
+              activeSection === 'strategy'
+                ? 'bg-gradient-to-br from-yellow-200 via-amber-400 to-yellow-600 shadow-lg'
+                : 'bg-gradient-to-br from-yellow-200 via-amber-300 to-yellow-500'
+            }
+          `}
+          >
+            <Zap size={16} className="text-yellow-900 group-hover:animate-pulse" />
+          </div>
+          <span
+            className={`font-semibold
+            ${
+              activeSection === 'strategy'
+                ? 'bg-gradient-to-br from-yellow-200 via-amber-400 to-yellow-600'
+                : 'bg-gradient-to-br from-yellow-200 via-amber-300 to-yellow-500'
+            }
+            bg-clip-text text-transparent
+            drop-shadow-[0_2px_2px_rgba(0,0,0,0.3)]`}
+          >
+            Strategy
+          </span>
+        </div>
+        <ChevronRight
           size={18}
-          className={activeSection === 'strategy' ? 'text-yellow-100' : 'text-yellow-300'}
+          className={`
+            ${
+              activeSection === 'strategy'
+                ? 'text-amber-300 drop-shadow-[0_2px_2px_rgba(0,0,0,0.3)]'
+                : 'text-yellow-400/90 drop-shadow-[0_1px_1px_rgba(0,0,0,0.2)]'
+            }
+            group-hover:translate-x-1 transition-transform duration-300`}
         />
-        Strategy
       </button>
     </div>
   );
