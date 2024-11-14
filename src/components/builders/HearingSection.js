@@ -146,66 +146,68 @@ const HearingSection = () => {
         </div>
 
         <div className="bg-white/5 backdrop-blur-xl rounded-lg p-6 border border-purple-300/20">
-          <div className="mb-6 p-4 bg-blue-500/10 rounded-lg border border-blue-300/20">
-            <p className="text-blue-200 text-sm">
-              <span className="font-medium">Format Requis:</span> Fichier texte (.txt) contenant des
-              adresses email séparées par des virgules.
-              <br />
-              <span className="text-blue-300 text-xs mt-1 block">
-                Exemple: email1@domain.com, email2@domain.com, email3@domain.com
-              </span>
-            </p>
-          </div>
+          <div className="flex gap-6">
+            {/* Zone de dépôt à gauche */}
+            <div
+              onClick={() => emailInputRef.current?.click()}
+              onDragOver={handleDragOver}
+              onDrop={handleEmailDrop}
+              className={`
+                border-2 border-dashed rounded-lg p-4
+                transition-all duration-300 cursor-pointer
+                flex flex-col items-center justify-center
+                min-w-48 h-32
+                ${
+                  emailFile
+                    ? 'border-purple-500/50 bg-purple-500/5'
+                    : 'border-purple-300/20 hover:border-purple-300/40 hover:bg-white/5'
+                }
+              `}
+            >
+              <input
+                type="file"
+                ref={emailInputRef}
+                onChange={handleEmailFileChange}
+                accept=".txt"
+                className="hidden"
+              />
 
-          <div
-            onClick={() => emailInputRef.current?.click()}
-            onDragOver={handleDragOver}
-            onDrop={handleEmailDrop}
-            className={`
-              border-2 border-dashed rounded-lg p-8
-              transition-all duration-300 cursor-pointer
-              flex flex-col items-center justify-center
-              ${
-                emailFile
-                  ? 'border-purple-500/50 bg-purple-500/5'
-                  : 'border-purple-300/20 hover:border-purple-300/40 hover:bg-white/5'
-              }
-            `}
-          >
-            <input
-              type="file"
-              ref={emailInputRef}
-              onChange={handleEmailFileChange}
-              accept=".txt"
-              className="hidden"
-            />
+              {emailFile ? (
+                <div className="text-center">
+                  <p className="text-purple-200 text-sm mb-1">{emailFile.name}</p>
+                  <p className="text-purple-300 text-xs">{emails.length} emails</p>
+                </div>
+              ) : (
+                <div className="text-center">
+                  <p className="text-purple-200 text-sm">Déposez le fichier ici</p>
+                  <p className="text-purple-300 text-xs mt-1">ou cliquez pour parcourir</p>
+                </div>
+              )}
+            </div>
 
-            {emailFile ? (
-              <div className="text-center">
-                <p className="text-purple-200 font-medium mb-2">{emailFile.name}</p>
-                <p className="text-purple-200 text-sm">{emails.length} emails chargés</p>
-                <p className="text-purple-300 text-sm">{(emailFile.size / 1024).toFixed(2)} KB</p>
-              </div>
-            ) : (
-              <div className="text-center">
-                <p className="text-purple-200 font-medium mb-2">
-                  Déposez votre liste d'emails ici ou cliquez pour parcourir
-                </p>
-                <p className="text-purple-300 text-sm">
-                  Accepte uniquement les fichiers .txt avec des emails séparés par des virgules
+            {/* Informations à droite */}
+            <div className="flex-1">
+              <div className="p-4 bg-blue-500/10 rounded-lg border border-blue-300/20">
+                <p className="text-blue-200 text-sm">
+                  <span className="font-medium">Format Requis:</span> Fichier texte (.txt) contenant
+                  des adresses email séparées par des virgules.
+                  <br />
+                  <span className="text-blue-300 text-xs mt-1 block">
+                    Cette liste sera invitée à acheter votre ART
+                  </span>
                 </p>
               </div>
-            )}
+            </div>
           </div>
 
           {emailError && (
-            <div className="mt-6 p-4 bg-red-500/10 rounded-lg border border-red-300/20">
+            <div className="mt-4 p-4 bg-red-500/10 rounded-lg border border-red-300/20">
               <p className="text-red-200 text-center">{emailError}</p>
             </div>
           )}
 
           {isEmailSubmitted && (
-            <div className="mt-6 p-4 bg-green-500/10 rounded-lg border border-green-300/20">
+            <div className="mt-4 p-4 bg-green-500/10 rounded-lg border border-green-300/20">
               <p className="text-green-200 text-center">Les emails ont été envoyés avec succès</p>
             </div>
           )}
@@ -233,67 +235,68 @@ const HearingSection = () => {
         </div>
 
         <div className="bg-white/5 backdrop-blur-xl rounded-lg p-6 border border-purple-300/20">
-          <div className="mb-6 p-4 bg-blue-500/10 rounded-lg border border-blue-300/20">
-            <p className="text-blue-200 text-sm">
-              <span className="font-medium">Format Requis:</span> Fichier texte (.txt) contenant des
-              adresses de wallet ERC20 séparées par des virgules.
-              <br />
-              <span className="text-blue-300 text-xs mt-1 block">
-                Exemple: 0x1234567890abcdef1234567890abcdef12345678,
-                0xabcdef1234567890abcdef1234567890abcdef12
-              </span>
-            </p>
-          </div>
+          <div className="flex gap-6">
+            {/* Zone de dépôt à gauche */}
+            <div
+              onClick={() => walletInputRef.current?.click()}
+              onDragOver={handleDragOver}
+              onDrop={handleWalletDrop}
+              className={`
+                border-2 border-dashed rounded-lg p-4
+                transition-all duration-300 cursor-pointer
+                flex flex-col items-center justify-center
+                min-w-48 h-32
+                ${
+                  walletFile
+                    ? 'border-purple-500/50 bg-purple-500/5'
+                    : 'border-purple-300/20 hover:border-purple-300/40 hover:bg-white/5'
+                }
+              `}
+            >
+              <input
+                type="file"
+                ref={walletInputRef}
+                onChange={handleWalletFileChange}
+                accept=".txt"
+                className="hidden"
+              />
 
-          <div
-            onClick={() => walletInputRef.current?.click()}
-            onDragOver={handleDragOver}
-            onDrop={handleWalletDrop}
-            className={`
-              border-2 border-dashed rounded-lg p-8
-              transition-all duration-300 cursor-pointer
-              flex flex-col items-center justify-center
-              ${
-                walletFile
-                  ? 'border-purple-500/50 bg-purple-500/5'
-                  : 'border-purple-300/20 hover:border-purple-300/40 hover:bg-white/5'
-              }
-            `}
-          >
-            <input
-              type="file"
-              ref={walletInputRef}
-              onChange={handleWalletFileChange}
-              accept=".txt"
-              className="hidden"
-            />
+              {walletFile ? (
+                <div className="text-center">
+                  <p className="text-purple-200 text-sm mb-1">{walletFile.name}</p>
+                  <p className="text-purple-300 text-xs">{wallets.length} wallets</p>
+                </div>
+              ) : (
+                <div className="text-center">
+                  <p className="text-purple-200 text-sm">Déposez le fichier ici</p>
+                  <p className="text-purple-300 text-xs mt-1">ou cliquez pour parcourir</p>
+                </div>
+              )}
+            </div>
 
-            {walletFile ? (
-              <div className="text-center">
-                <p className="text-purple-200 font-medium mb-2">{walletFile.name}</p>
-                <p className="text-purple-200 text-sm">{wallets.length} wallets chargés</p>
-                <p className="text-purple-300 text-sm">{(walletFile.size / 1024).toFixed(2)} KB</p>
-              </div>
-            ) : (
-              <div className="text-center">
-                <p className="text-purple-200 font-medium mb-2">
-                  Déposez votre liste de wallets ici ou cliquez pour parcourir
-                </p>
-                <p className="text-purple-300 text-sm">
-                  Accepte uniquement les fichiers .txt avec des adresses séparées par des virgules
+            {/* Informations à droite */}
+            <div className="flex-1">
+              <div className="p-4 bg-blue-500/10 rounded-lg border border-blue-300/20">
+                <p className="text-blue-200 text-sm">
+                  <span className="font-medium">Format Requis:</span> Fichier texte (.txt) contenant
+                  des adresses de wallet ERC20 séparées par des virgules.
+                  <br />
+                  <span className="text-blue-300 text-xs mt-1 block">
+                    Cette liste de wallet sera exposée à votre ART dans IBW
+                  </span>
                 </p>
               </div>
-            )}
+            </div>
           </div>
 
           {walletError && (
-            <div className="mt-6 p-4 bg-red-500/10 rounded-lg border border-red-300/20">
+            <div className="mt-4 p-4 bg-red-500/10 rounded-lg border border-red-300/20">
               <p className="text-red-200 text-center">{walletError}</p>
             </div>
           )}
 
           {isWalletSubmitted && (
-            <div className="mt-6 p-4 bg-green-500/10 rounded-lg border border-green-300/20">
+            <div className="mt-4 p-4 bg-green-500/10 rounded-lg border border-green-300/20">
               <p className="text-green-200 text-center">Les wallets ont été traités avec succès</p>
             </div>
           )}
