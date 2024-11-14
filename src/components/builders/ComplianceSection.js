@@ -92,11 +92,18 @@ const ComplianceSection = () => {
   };
 
   const isFormValid = () => {
-    return Object.entries(formData).every(([key, value]) => {
-      if (key === 'riskScore') return true;
-      if (typeof value === 'string') return value.trim() !== '';
-      return value !== null;
-    });
+    const invalidFields = Object.entries(formData).reduce((acc, [key, value]) => {
+      if (key === 'riskScore') return acc;
+      if (key === 'fractionnable' && value === null) {
+        return [...acc, key];
+      }
+      if (typeof value === 'string' && value.trim() === '') {
+        return [...acc, key];
+      }
+      return acc;
+    }, []);
+
+    return invalidFields.length === 0 && selectedToken && formData.issuerLegalPerson;
   };
 
   const handleGenerateClick = (event) => {
@@ -209,6 +216,7 @@ const ComplianceSection = () => {
         onConfirm={handleGenerateWhitepaper}
         buttonPosition={buttonPosition}
       />
+
       {!selectedToken ? (
         <div className="bg-white/5 backdrop-blur-xl rounded-lg p-6 border border-purple-300/20 mt-8">
           <p className="text-purple-200 text-center">
@@ -356,25 +364,34 @@ const ComplianceSection = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-purple-200 mb-2">
-              Risk Score (1-10)
-            </label>
-            <div className="grid grid-cols-10 gap-2 w-full">
-              {[...Array(10)].map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleInputChange('riskScore', (index + 1).toString())}
-                  className={`aspect-square rounded-lg transition-all duration-300 
-          ${
-            formData.riskScore === (index + 1).toString()
-              ? 'bg-purple-500/50 text-purple-100 ring-2 ring-purple-400'
-              : 'bg-purple-500/20 text-purple-200 hover:bg-purple-500/30'
-          } 
-          border border-purple-300/20 flex items-center justify-center font-medium`}
-                >
-                  {index + 1}
-                </button>
-              ))}
+            <label className="block text-sm font-medium text-purple-200 mb-2">Risks</label>
+            <textarea
+              value={formData.risks}
+              onChange={(e) => handleInputChange('risks', e.target.value)}
+              rows={4}
+              className="w-full px-4 py-2 bg-white/5 border border-purple-300/20 rounded-lg text-purple-100 focus:outline-none focus:ring-2 focus:ring-purple-400/30 mb-4"
+            />
+            <div>
+              <label className="block text-sm font-medium text-purple-200 mb-2">
+                Risk Score (1-10)
+              </label>
+              <div className="grid grid-cols-10 gap-2 w-full">
+                {[...Array(10)].map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleInputChange('riskScore', (index + 1).toString())}
+                    className={`aspect-square rounded-lg transition-all duration-300 
+                        ${
+                          formData.riskScore === (index + 1).toString()
+                            ? 'bg-purple-500/50 text-purple-100 ring-2 ring-purple-400'
+                            : 'bg-purple-500/20 text-purple-200 hover:bg-purple-500/30'
+                        } 
+                        border border-purple-300/20 flex items-center justify-center font-medium`}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
