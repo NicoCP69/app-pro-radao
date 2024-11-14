@@ -1,4 +1,49 @@
 import React, { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
+
+const TokenSelector = ({ selectedToken, onTokenSelect, tokens = [], className = '' }) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  return (
+    <div className="relative">
+      <button
+        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+        className={`px-4 py-2 rounded-lg transition-all duration-300 
+          bg-purple-500/20 hover:bg-purple-500/30 
+          text-purple-200 border border-purple-300/20 
+          flex items-center gap-2 min-w-[200px] justify-between
+          ${className}`}
+      >
+        <span className="truncate">
+          {selectedToken ? `${selectedToken.ticker} - ${selectedToken.name}` : 'Select Token'}
+        </span>
+        <ChevronDown
+          size={18}
+          className={`transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`}
+        />
+      </button>
+
+      {isDropdownOpen && (
+        <div className="absolute z-10 w-full mt-2 rounded-lg border border-purple-300/20 bg-gray-900/95 backdrop-blur-xl shadow-xl">
+          <div className="py-1">
+            {tokens.map((token) => (
+              <button
+                key={token.id}
+                onClick={() => {
+                  onTokenSelect(token);
+                  setIsDropdownOpen(false);
+                }}
+                className="w-full px-4 py-2 text-left text-purple-200 hover:bg-purple-500/20 transition-colors duration-150"
+              >
+                {token.ticker} - {token.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const TokenSection = () => {
   const [isConfigLocked, setIsConfigLocked] = useState(false);
@@ -109,9 +154,16 @@ const TokenSection = () => {
       {/* Your Tokens Section */}
       <div className="bg-white/5 backdrop-blur-xl rounded-lg p-6 border border-purple-300/20">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold bg-gradient-to-r from-purple-200 to-pink-200 bg-clip-text text-transparent">
-            Your Tokens
-          </h2>
+          <div className="flex items-center gap-6">
+            <h2 className="text-2xl font-semibold bg-gradient-to-r from-purple-200 to-pink-200 bg-clip-text text-transparent">
+              Your Tokens
+            </h2>
+            <TokenSelector
+              selectedToken={selectedToken}
+              onTokenSelect={handleSelectToken}
+              tokens={tokens}
+            />
+          </div>
           <button
             onClick={handleAddNew}
             className="px-4 py-2 rounded-lg bg-purple-500/20 hover:bg-purple-500/30 
@@ -121,24 +173,6 @@ const TokenSection = () => {
             Add New
           </button>
         </div>
-
-        <select
-          onChange={(e) => {
-            const selectedId = parseInt(e.target.value);
-            const token = tokens.find((t) => t.id === selectedId);
-            handleSelectToken(token);
-          }}
-          className="w-full px-4 py-2 bg-white/5 border border-purple-300/20 rounded-lg
-                   text-purple-100 focus:outline-none focus:ring-2 focus:ring-purple-400/30"
-          value={selectedToken?.id || ''}
-        >
-          <option value="">Select a token</option>
-          {tokens.map((token) => (
-            <option key={token.id} value={token.id}>
-              {token.ticker} - {token.name}
-            </option>
-          ))}
-        </select>
       </div>
 
       {/* Token Configuration Section */}
@@ -156,7 +190,7 @@ const TokenSection = () => {
                     bg-orange-500/20 hover:bg-orange-500/30 text-orange-200 
                     hover:scale-105 border border-orange-300/20"
                 >
-                  Modify Configuration
+                  Modify
                 </button>
               )}
               <button
@@ -172,7 +206,7 @@ const TokenSection = () => {
                       : 'bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 hover:scale-105'
                   } border border-purple-300/20`}
               >
-                {isConfigLocked ? 'Configuration Locked' : 'Validate Configuration'}
+                {isConfigLocked ? 'Locked' : 'Validate'}
               </button>
             </div>
           </div>
@@ -181,7 +215,6 @@ const TokenSection = () => {
             <div className="space-y-6">
               {/* First Row - Name, Ticker, Fees */}
               <div className="flex gap-6">
-                {/* Name Field - 40% width */}
                 <div className="w-2/5">
                   <label className="block text-sm font-medium text-purple-200 mb-2">Name</label>
                   <input
@@ -197,7 +230,6 @@ const TokenSection = () => {
                   />
                 </div>
 
-                {/* Ticker Field - 20% width */}
                 <div className="w-1/5">
                   <label className="block text-sm font-medium text-purple-200 mb-2">Ticker</label>
                   <input
@@ -213,7 +245,6 @@ const TokenSection = () => {
                   />
                 </div>
 
-                {/* 1st Market Fees Field - 20% width */}
                 <div className="w-1/5">
                   <label className="block text-sm font-medium text-purple-200 mb-2">
                     1st Market Fees (%)
@@ -234,7 +265,6 @@ const TokenSection = () => {
                   />
                 </div>
 
-                {/* Reward Fees Field - 20% width */}
                 <div className="w-1/5">
                   <label className="block text-sm font-medium text-purple-200 mb-2">
                     Reward Fees (%)
@@ -256,7 +286,7 @@ const TokenSection = () => {
                 </div>
               </div>
 
-              {/* Wallet Fees Field - Full width */}
+              {/* Wallet Fees Field */}
               <div>
                 <label className="block text-sm font-medium text-purple-200 mb-2">
                   Wallet Fees (Gnosis Blockchain Address)

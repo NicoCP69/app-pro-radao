@@ -5,6 +5,8 @@ import TokenSection from '../builders/TokenSection';
 import ContentSection from '../builders/ContentSection';
 import DistributorSection from '../builders/DistributorSection';
 import ComplianceSection from '../builders/ComplianceSection';
+import StrategySection from '../builders/StrategySection';
+import { Zap } from 'lucide-react'; // Correction ici
 
 const BuildersSidebar = ({ activeSection, setActiveSection }) => {
   const menuItems = [
@@ -17,24 +19,47 @@ const BuildersSidebar = ({ activeSection, setActiveSection }) => {
   ];
 
   return (
-    <div className="w-64 space-y-3">
-      {menuItems.map((item) => (
-        <button
-          key={item.id}
-          onClick={() => setActiveSection(item.id)}
-          className={`w-full px-6 py-3 rounded-lg transition-all duration-300
-            backdrop-blur-xl border border-purple-300/20
-            ${
-              activeSection === item.id
-                ? 'bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-purple-100 scale-105 shadow-lg'
-                : 'bg-white/5 text-purple-300 hover:bg-white/10 hover:scale-102'
-            }
-            flex items-center justify-start
-            transform hover:translate-x-1`}
-        >
-          {item.title}
-        </button>
-      ))}
+    <div className="w-64 flex flex-col h-full">
+      <div className="space-y-3">
+        {menuItems.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => setActiveSection(item.id)}
+            className={`w-full px-6 py-3 rounded-lg transition-all duration-300
+              backdrop-blur-xl border border-purple-300/20
+              ${
+                activeSection === item.id
+                  ? 'bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-purple-100 scale-105 shadow-lg'
+                  : 'bg-white/5 text-purple-300 hover:bg-white/10 hover:scale-102'
+              }
+              flex items-center justify-start
+              transform hover:translate-x-1`}
+          >
+            {item.title}
+          </button>
+        ))}
+      </div>
+      {/* Strategy button with significant spacing and lightning icon */}
+      <div className="flex-grow min-h-[100px]" /> {/* Spacer */}
+      <button
+        onClick={() => setActiveSection('strategy')}
+        className={`w-full px-6 py-3 rounded-lg transition-all duration-300
+          backdrop-blur-xl border border-yellow-300/40
+          mb-6
+          ${
+            activeSection === 'strategy'
+              ? 'bg-gradient-to-r from-yellow-500/30 to-amber-500/30 text-yellow-100 scale-105 shadow-lg'
+              : 'bg-white/5 text-yellow-300 hover:bg-white/10 hover:scale-102'
+          }
+          flex items-center gap-3
+          transform hover:translate-x-1`}
+      >
+        <Zap
+          size={18}
+          className={activeSection === 'strategy' ? 'text-yellow-100' : 'text-yellow-300'}
+        />
+        Strategy
+      </button>
     </div>
   );
 };
@@ -54,6 +79,8 @@ const BuildersContent = ({ section }) => {
         return <IssuerSection />;
       case 'hearing':
         return <HearingSection />;
+      case 'strategy':
+        return <StrategySection />;
       default:
         return <div className="text-purple-200 text-center">In Progress...</div>;
     }
