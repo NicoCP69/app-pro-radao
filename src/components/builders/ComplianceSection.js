@@ -356,26 +356,25 @@ const ComplianceSection = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-purple-200 mb-2">Risks</label>
-            <textarea
-              value={formData.risks}
-              onChange={(e) => handleInputChange('risks', e.target.value)}
-              rows={4}
-              className="w-full px-4 py-2 bg-white/5 border border-purple-300/20 rounded-lg text-purple-100 focus:outline-none focus:ring-2 focus:ring-purple-400/30 mb-2"
-            />
-            <div>
-              <label className="block text-sm font-medium text-purple-200 mb-2">
-                Risk Score (1-10)
-              </label>
-              <input
-                type="range"
-                min="1"
-                max="10"
-                value={formData.riskScore}
-                onChange={(e) => handleInputChange('riskScore', e.target.value)}
-                className="w-full"
-              />
-              <div className="text-center text-purple-200 mt-1">Score: {formData.riskScore}</div>
+            <label className="block text-sm font-medium text-purple-200 mb-2">
+              Risk Score (1-10)
+            </label>
+            <div className="grid grid-cols-10 gap-2 w-full">
+              {[...Array(10)].map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleInputChange('riskScore', (index + 1).toString())}
+                  className={`aspect-square rounded-lg transition-all duration-300 
+          ${
+            formData.riskScore === (index + 1).toString()
+              ? 'bg-purple-500/50 text-purple-100 ring-2 ring-purple-400'
+              : 'bg-purple-500/20 text-purple-200 hover:bg-purple-500/30'
+          } 
+          border border-purple-300/20 flex items-center justify-center font-medium`}
+                >
+                  {index + 1}
+                </button>
+              ))}
             </div>
           </div>
 
