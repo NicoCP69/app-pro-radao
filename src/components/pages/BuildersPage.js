@@ -4,11 +4,13 @@ import IssuerSection from '../builders/IssuerSection';
 import HearingSection from '../builders/HearingSection';
 import TokenSection from '../builders/TokenSection';
 import ContentSection from '../builders/ContentSection';
+import ComplianceSection from '../builders/ComplianceSection';
 
 const BuildersSidebar = ({ activeSection, setActiveSection }) => {
   const menuItems = [
     { id: 'token', title: 'Token' },
     { id: 'content', title: 'Reserve' },
+    { id: 'compliance', title: 'Compliance' },
     { id: 'issuer', title: 'Issuer' },
     { id: 'distributor', title: 'Distributor' },
     { id: 'hearing', title: 'Audience' },
@@ -45,7 +47,9 @@ const BuildersContent = ({ section }) => {
       case 'content':
         return <ContentSection />;
       case 'distributor':
-        return <DistributorSection />;
+        return <ContentSection />;
+      case 'compliance':
+        return <ComplianceSection />;
       case 'issuer':
         return <IssuerSection />;
       case 'hearing':
